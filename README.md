@@ -2,6 +2,10 @@
 
 **[Cassidy]’s playground for [GNOME] design experiments**
 
+## Unreleased
+
+Note that this is not usable yet. 😅
+
 ## What is Beyond?
 
 Beyond is a custom configuration of [Fedora Silverblue] built with [Universal Blue], used as a playground for GNOME design experiments.
