@@ -4,10 +4,7 @@ set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
 
-
-# Install/remove packages
-
-## Remove Fedora packages that will be replaced by Flatpaks or other packages
+# Remove Fedora packages that will be replaced by Flatpaks or other packages
 rpm-ostree override remove \
   firefox firefox-langpacks \
   gnome-classic-session gnome-classic-session-xsession \
@@ -18,7 +15,6 @@ rpm-ostree override remove \
   gnome-tweaks \
   htop nvtop
 
-## Packages that don't work as Flatpaks from Fedora repos
+# Packages that don't work as Flatpaks from Fedora repos
 rpm-ostree install \
   ptyxis
-

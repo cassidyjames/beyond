@@ -16,6 +16,8 @@ Currently, the following changes are being tested in Beyond:
 - Ptyxis (branded as "Terminal") as the default terminal emulator
 - Light Style extension to test the new built-in Shell light style
 - Auto Activities extension to make the overview more discoverable
+- Incubation apps preinstalled
+- Some utility Circle apps preinstalled to improve default/offline functionality
 
 ### Changes from Silverblue
 

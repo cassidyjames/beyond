@@ -1,0 +1,7 @@
+app/app.drey.Warp/x86_64/stable
+app/com.mattjakeman.ExtensionManager/x86_64/stable
+app/im.bernard.Nostalgia/x86_64/stable
+app/io.gitlab.news_flash.NewsFlash/x86_64/stable
+app/org.gnome.gitlab.YaLTeR.VideoTrimmer/x86_64/stable
+app/org.gnome.Podcasts/x86_64/stable
+app/org.gnome.SoundRecorder/x86_64/stable
