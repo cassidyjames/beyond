@@ -28,7 +28,6 @@ jobs:
         fedora_version:
           - 40
     env:
-      IMAGE_TAG: ${{ matrix.fedora_version }}-amd64
       IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
     steps:
       - name: Free Disk Space
@@ -57,7 +56,7 @@ jobs:
       - name: Get Flatpak Dependencies
         id: flatpak-dependencies
         env:
-          IMAGE: ${{ env.IMAGE_REGISTRY }}/${{ matrix.image_name }}:${{ env.IMAGE_TAG }}
+          IMAGE: ${{ env.IMAGE_REGISTRY }}/${{ matrix.image_name }}:${{ steps.generate-tag.outputs.tag }}
         shell: bash
         run: |
           set -euox pipefail
@@ -95,10 +94,10 @@ jobs:
           image_repo: ${{ env.IMAGE_REGISTRY }}
           variant: Silverblue
           version: ${{ matrix.fedora_version }}
-          image_tag: ${{ env.IMAGE_TAG }}
+          image_tag: ${{ steps.generate-tag.outputs.tag }}
           secure_boot_key_url: "https://github.com/ublue-os/akmods/raw/main/certs/public_key.der"
           enrollment_password: "universalblue"
-          iso_name: ${{ matrix.image_name }}-${{ env.IMAGE_TAG }}.iso
+          iso_name: ${{ matrix.image_name }}-${{ steps.generate-tag.outputs.tag }}.iso
           enable_cache_dnf: "false"
           enable_cache_skopeo: "false"
           flatpak_remote_refs_dir: ${{ steps.flatpak-dependencies.outputs.FLATPAK_REFS_DIR }}
