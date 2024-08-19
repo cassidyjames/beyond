@@ -62,19 +62,9 @@ jobs:
         run: |
           set -euox pipefail
 
-          # Make temp space
           TEMP_FLATPAK_INSTALL_DIR=$(mktemp -d -p ${{ github.workspace }} flatpak.XXX)
-          FLATPAK_REFS_DIR=DIR=${{ github.workspace }}/flatpak
-          mkdir -p "${FLATPAK_REFS_DIR}"
-          mv flatpaks.txt "${FLATPAK_REFS_DIR_ABS}/flatpaks.txt"
-
-          # Read the list of Flatpak refs
-          FLATPAK_REFS=()
-          while IFS= read -r line; do
-            FLATPAK_REFS+=("$line")
-          done < <(cat "${FLATPAK_REFS_DIR}/core.txt" "${FLATPAK_REFS_DIR}/incubator.txt" "${FLATPAK_REFS_DIR}/circle.txt")
-
-          # Generate install script
+          FLATPAK_REFS_DIR=${{ github.workspace }}/flatpak
+          FLATPAK_REFS=$(cat core.txt incubator.txt circle.txt)
           cat << EOF > ${TEMP_FLATPAK_INSTALL_DIR}/script.sh
           cat /temp_flatpak_install_dir/script.sh
           mkdir -p /flatpak/flatpak /flatpak/triggers
@@ -82,7 +72,7 @@ jobs:
           chmod -R 1777 /var/tmp
           flatpak config --system --set languages "*"
           flatpak remote-add --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-          flatpak install --system --noninteractive flathub ${FLATPAK_REFS[@]}
+          flatpak install --system --noninteractive flathub ${FLATPAK_REFS}
           ostree refs --repo=\${FLATPAK_SYSTEM_DIR}/repo | grep '^deploy/' | grep -v 'org\.freedesktop\.Platform\.openh264' | sed 's/^deploy\///g' > /output/flatpaks_with_deps
           EOF
           docker run --rm --privileged \
