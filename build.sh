@@ -5,19 +5,26 @@ set -ouex pipefail
 RELEASE="$(rpm -E %fedora)"
 
 
-### Install packages
+# Install/remove packages
 
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
+## Remove Fedora packages that will be replaced by Flatpaks or other packages
+rpm-ostree override remove \
 
-# this installs a package from fedora repos
-rpm-ostree install screen
+  # Replaced by GNOME Web/can install Firefox from Flatpak
+  firefox firefox-langpacks \
 
-# this would install a package from rpmfusion
-# rpm-ostree install vlc
+  # We don't need a system extension for a logo.. or other random things
+  gnome-shell-extension-apps-menu gnome-shell-extension-background-logo \
+  gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu \
+  gnome-shell-extension-window-list \
 
-#### Example for enabling a System Unit File
+  # Replaced by Ptyxis
+  gnome-terminal gnome-terminal-nautilus \
 
-systemctl enable podman.socket
+  # Create ugly .desktop files for minimal value
+  htop nvtop
+
+## Packages that don't work as Flatpaks from Fedora repos
+rpm-ostree install \
+  ptyxis
+
