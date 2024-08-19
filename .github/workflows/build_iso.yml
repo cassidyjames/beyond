@@ -56,7 +56,7 @@ jobs:
       - name: Get Flatpak Dependencies
         id: flatpak-dependencies
         env:
-          IMAGE: ${{ env.IMAGE_REGISTRY }}/${{ matrix.image_name }}:${{ steps.generate-tag.outputs.tag }}
+          IMAGE: ${{ env.IMAGE_REGISTRY }}/${{ matrix.image_name }}:latest
         shell: bash
         run: |
           set -euox pipefail
