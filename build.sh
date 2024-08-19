@@ -10,6 +10,7 @@ RELEASE="$(rpm -E %fedora)"
 ## Remove Fedora packages that will be replaced by Flatpaks or other packages
 rpm-ostree override remove \
   firefox firefox-langpacks \
+  gnome-classic-session gnome-classic-session-xsession \
   gnome-shell-extension-apps-menu gnome-shell-extension-background-logo \
   gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu \
   gnome-shell-extension-window-list \
