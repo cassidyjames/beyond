@@ -15,6 +15,7 @@ rpm-ostree override remove \
   gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu \
   gnome-shell-extension-window-list \
   gnome-terminal gnome-terminal-nautilus \
+  gnome-tweaks \
   htop nvtop
 
 ## Packages that don't work as Flatpaks from Fedora repos
